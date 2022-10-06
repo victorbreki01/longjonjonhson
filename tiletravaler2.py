@@ -107,7 +107,7 @@ def game(column, row, direction, direction_option, victory, baddirect):
                 baddirect = 6
 			
             elif column == 3 and row == 1:  
-                print(f'Victory! Total coins {counter}. Moves {moves+counter}.')
+                print(f'Victory! Total coins {counter}. Moves {moves}.')
                 victory = True
 
             elif (column == 3) and (row == 2):
@@ -133,11 +133,13 @@ def game(column, row, direction, direction_option, victory, baddirect):
             else:
                 print('Not a valid direction!')
                 in_case(baddirect)
+                moves += 1
         else:
             restart = new_game()
             if restart == True:
                 victory = False
                 counter = 0
+                moves = 0
                 column, row = 1, 1	
 
 def initialize() -> None:
@@ -159,6 +161,7 @@ def new_game():
         return True
     else:
         return False
+
 
 # OK let's play
 main()
