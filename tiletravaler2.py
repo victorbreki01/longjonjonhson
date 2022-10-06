@@ -1,3 +1,4 @@
+import random
 """
 1. Describe the general outline of how you're going to develop this program, and commit it.
 
@@ -11,7 +12,8 @@ N = '(N)orth'
 S = '(S)outh'
 E = '(E)ast'
 W = '(W)est'
-
+YES = "y"
+NO = "n"
 # definers for tiles, directions and while loop
 column, row = 1 , 1
 direction_option = ('')
@@ -57,6 +59,8 @@ def move(column, row, direction):
 def game(column, row, direction, direction_option, victory, baddirect):
     ''' while loop for player moving through the tiles'''
     counter = 0
+    moves = 0
+    initialize()
     while not victory:
         if direction in direction_option:
 		
@@ -103,7 +107,7 @@ def game(column, row, direction, direction_option, victory, baddirect):
                 baddirect = 6
 			
             elif column == 3 and row == 1:  
-                print(f'Victory! Total coins {counter}.')
+                print(f'Victory! Total coins {counter}. Moves {moves+counter}.')
                 victory = True
 
             elif (column == 3) and (row == 2):
@@ -119,12 +123,13 @@ def game(column, row, direction, direction_option, victory, baddirect):
                 print(f"You can travel: {S} or {W}.")
                 direction_option = ('s', 'w')
                 baddirect = 9
-
         if victory != True:
-            direction = str(input("Direction: "))
+            direction = random.choice(['n','e','s','w'])
+            print(f"Direction: {direction}")
             direction = direction.lower()
             if direction in direction_option:
                 column, row = move(column, row, direction)
+                moves += 1
             else:
                 print('Not a valid direction!')
                 in_case(baddirect)
@@ -134,9 +139,14 @@ def game(column, row, direction, direction_option, victory, baddirect):
                 victory = False
                 counter = 0
                 column, row = 1, 1	
+
+def initialize() -> None:
+    the_seed = int(input("Input seed: "))
+    random.seed(the_seed)
+
 def coin_counter():
-    choice = input("Pull a lever (y/n): ")
-    choice = choice.lower()
+    choice = random.choice([YES, NO])
+    print(f"Pull a lever (y/n): {choice}")
     if choice == "y":
         return True
     else:
