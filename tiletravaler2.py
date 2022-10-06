@@ -19,6 +19,9 @@ direction = ''
 victory = False
 baddirect = 0
 
+def main():
+    game(column, row, direction, direction_option, victory, baddirect)
+
 def in_case(baddirect):
     if baddirect == 1:
         return print(f"You can travel: {N}.")
@@ -101,7 +104,7 @@ def game(column, row, direction, direction_option, victory, baddirect):
 			
             elif column == 3 and row == 1:  
                 print(f'Victory! Total coins {counter}.')
-                victory = True				
+                victory = True
 
             elif (column == 3) and (row == 2):
                 coin = coin_counter()
@@ -125,7 +128,12 @@ def game(column, row, direction, direction_option, victory, baddirect):
             else:
                 print('Not a valid direction!')
                 in_case(baddirect)
-
+        else:
+            restart = new_game()
+            if restart == True:
+                victory = False
+                counter = 0
+                column, row = 1, 1	
 def coin_counter():
     choice = input("Pull a lever (y/n): ")
     choice = choice.lower()
@@ -133,5 +141,14 @@ def coin_counter():
         return True
     else:
         return False
+
+def new_game():
+    restart = input("Play again (y/n): ")
+    restart = restart.lower()
+    if restart == "y":
+        return True
+    else:
+        return False
+
 # OK let's play
-game(column, row, direction, direction_option, victory, baddirect) 
+main()
